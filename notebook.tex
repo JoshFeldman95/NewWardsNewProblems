@@ -1,0 +1,1182 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{VoterRepresentationAnalysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{regression}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{as} \PY{n+nn}{sm}
+\end{Verbatim}
+
+
+    \section{How Toronto's New Wards Change Voter
+Representation}\label{how-torontos-new-wards-change-voter-representation}
+
+    This analysis will look at the census profile data for each ward
+
+    \textbf{Notes:} * Think about a grouping wards into big, medium, and
+small * Measure change in inverse of size of ward (i.e. how much
+"representation" does each person have) * Histogram of percent of
+immigrants in each region (look at "dilution" / wards with high
+proportion of "protected group" that don't exist anymore) * IQSS
+consulting * Mention that this is sample from stats. Also, mention that
+well designed sample is as good as entire population * subtraction is
+more interpretable than division
+
+\textbf{Factors to Analyze:} * Overall increase in ward size * Income *
+Language * First-gen immigrants * Race * Education * Employment * Rent
+vs. Home owners
+
+    \section{Overall Increase in Size of
+Ward}\label{overall-increase-in-size-of-ward}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{full\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/FullPop/full\PYZus{}47.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+        \PY{n}{full\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/FullPop/full\PYZus{}25.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{full\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}            total
+        Toronto  2731570
+        Ward 1     60735
+        Ward 2     57210
+        Ward 3     64065
+        Ward 4     66060
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{full\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}            total
+        Toronto  2731570
+        Ward 1    118040
+        Ward 2    118020
+        Ward 3    129080
+        Ward 4    108805
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{toronto\PYZus{}pop} \PY{o}{=} \PY{n}{full\PYZus{}after}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Toronto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The population of Toronto is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{toronto\PYZus{}pop}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The population of Toronto is  2731570
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{avg\PYZus{}ward\PYZus{}before} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{full\PYZus{}before}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{total}\PY{p}{)}
+        \PY{n}{avg\PYZus{}ward\PYZus{}after} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{full\PYZus{}after}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{total}\PY{p}{)}
+        \PY{n}{label} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{before}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{after}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{label}\PY{p}{,} \PY{p}{[}\PY{n}{avg\PYZus{}ward\PYZus{}before}\PY{p}{,} \PY{n}{avg\PYZus{}ward\PYZus{}after}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Ward Size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The average ward increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ people}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{which is a factor of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{avg\PYZus{}ward\PYZus{}after} \PY{o}{\PYZhy{}} \PY{n}{avg\PYZus{}ward\PYZus{}before}\PY{p}{)}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{avg\PYZus{}ward\PYZus{}after}\PY{o}{/}\PY{n}{avg\PYZus{}ward\PYZus{}before}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Function to calculate average increase (in group vs. out
+group)}\label{function-to-calculate-average-increase-in-group-vs.-out-group}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{df\PYZus{}before}\PY{p}{,} \PY{n}{df\PYZus{}after}\PY{p}{,} \PY{n}{full\PYZus{}before} \PY{o}{=} \PY{n}{full\PYZus{}before}\PY{p}{,} \PY{n}{full\PYZus{}after} \PY{o}{=} \PY{n}{full\PYZus{}after}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}scale popualtion}
+            \PY{n}{scale\PYZus{}factors\PYZus{}before} \PY{o}{=} \PY{n}{full\PYZus{}before}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{total}\PY{o}{/}\PY{n}{df\PYZus{}before}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{total}
+            \PY{n}{df\PYZus{}before\PYZus{}scaled} \PY{o}{=} \PY{n}{df\PYZus{}before}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{mul}\PY{p}{(}\PY{n}{scale\PYZus{}factors\PYZus{}before}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+        
+            \PY{n}{scale\PYZus{}factors\PYZus{}after} \PY{o}{=} \PY{n}{full\PYZus{}after}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{total}\PY{o}{/}\PY{n}{df\PYZus{}after}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{total}
+            \PY{n}{df\PYZus{}after\PYZus{}scaled} \PY{o}{=} \PY{n}{df\PYZus{}after}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{mul}\PY{p}{(}\PY{n}{scale\PYZus{}factors\PYZus{}after}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{return} \PY{n}{df\PYZus{}before\PYZus{}scaled}\PY{p}{,} \PY{n}{df\PYZus{}after\PYZus{}scaled}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{protected\PYZus{}before}\PY{p}{,} \PY{n}{majority\PYZus{}before}\PY{p}{,} \PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{protected\PYZus{}after}\PY{p}{,} \PY{n}{majority\PYZus{}after}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} get protected group ward size increase}
+            \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{weights} \PY{o}{=} \PY{n}{protected\PYZus{}before}\PY{p}{)}
+            \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{weights} \PY{o}{=} \PY{n}{protected\PYZus{}after}\PY{p}{)}
+            \PY{n}{avg\PYZus{}increase\PYZus{}protected} \PY{o}{=} \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}protected\PYZus{}after} \PY{o}{\PYZhy{}} \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}protected\PYZus{}before}
+        
+            \PY{c+c1}{\PYZsh{} get majority group ward size increase}
+            \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}majority\PYZus{}before} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{weights} \PY{o}{=} \PY{n}{majority\PYZus{}before}\PY{p}{)}
+            \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}majority\PYZus{}after} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{weights} \PY{o}{=} \PY{n}{majority\PYZus{}after}\PY{p}{)}
+            \PY{n}{avg\PYZus{}increase\PYZus{}majority} \PY{o}{=} \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}majority\PYZus{}after} \PY{o}{\PYZhy{}} \PY{n}{avg\PYZus{}ward\PYZus{}size\PYZus{}majority\PYZus{}before}
+        
+            \PY{k}{return} \PY{n+nb}{int}\PY{p}{(}\PY{n}{avg\PYZus{}increase\PYZus{}protected}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{avg\PYZus{}increase\PYZus{}majority}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Income}\label{income}
+
+The low income threshold is provided by the census data and needs to be
+defined.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{income\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Income/Income\PYZus{}47.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+        \PY{n}{income\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Income/Income\PYZus{}25.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}              total  low\_income  prop\_low\_income
+         Toronto  2691665.0    543365.0             20.2
+         Ward 1     60040.0     13875.0             23.1
+         Ward 2     56300.0     11345.0             20.2
+         Ward 3     63165.0      7575.0             12.0
+         Ward 4     65335.0      7850.0             12.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{income\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}              total  low\_income  prop\_low\_income
+         Toronto  2691665.0    543365.0             20.2
+         Ward 1    116955.0     26300.0             22.5
+         Ward 2    116055.0     13525.0             11.7
+         Ward 3    127525.0     19640.0             15.4
+         Ward 4    106445.0     18535.0             17.4
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{income\PYZus{}before}\PY{p}{,} \PY{n}{income\PYZus{}after} \PY{o}{=} \PY{n}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{income\PYZus{}before}\PY{p}{,} \PY{n}{income\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}           total    low\_income  prop\_low\_income
+         Ward 1  60735.0  14035.611676        23.367397
+         Ward 2  57210.0  11528.373890        20.526501
+         Ward 3  64065.0   7682.931608        12.170981
+         Ward 4  66060.0   7937.108747        12.133160
+         Ward 5  49520.0   7285.027545        14.852969
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} calculated high income}
+         \PY{n}{income\PYZus{}before}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{high\PYZus{}income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{total} \PY{o}{\PYZhy{}} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{low\PYZus{}income}
+         \PY{n}{income\PYZus{}after}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{high\PYZus{}income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{income\PYZus{}after}\PY{o}{.}\PY{n}{total} \PY{o}{\PYZhy{}} \PY{n}{income\PYZus{}after}\PY{o}{.}\PY{n}{low\PYZus{}income}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} Initialize params}
+         \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{total}
+         \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{low\PYZus{}income}
+         \PY{n}{majority\PYZus{}before} \PY{o}{=} \PY{n}{income\PYZus{}before}\PY{o}{.}\PY{n}{high\PYZus{}income}
+         
+         \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{income\PYZus{}after}\PY{o}{.}\PY{n}{total}
+         \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{income\PYZus{}after}\PY{o}{.}\PY{n}{low\PYZus{}income}
+         \PY{n}{majority\PYZus{}after} \PY{o}{=} \PY{n}{income\PYZus{}after}\PY{o}{.}\PY{n}{high\PYZus{}income}
+         
+         \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase} \PY{o}{=} \PY{n}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{protected\PYZus{}before}\PY{p}{,} \PY{n}{majority\PYZus{}before}\PY{p}{,} \PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{protected\PYZus{}after}\PY{p}{,} \PY{n}{majority\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you are low\PYZhy{}income, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you are high\PYZhy{}income, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a disparity of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{o}{\PYZhy{}}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+If you are low-income, your ward size increased by 50281 people on average
+If you are high-income, your ward size increased by 49989 people on average
+This is a disparity of 292 people on average
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} lost majorities}
+         \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{protected\PYZus{}before} \PY{o}{/} \PY{n}{total\PYZus{}before}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wards with majority low\PYZhy{}income before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{protected\PYZus{}after} \PY{o}{/} \PY{n}{total\PYZus{}after}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wards with majority low\PYZhy{}income before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/25}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+wards with majority low-income before: 0/47
+wards with majority low-income before: 0/25
+
+    \end{Verbatim}
+
+    \section{Visible Minority}\label{visible-minority}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{race\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Race/race\PYZus{}before.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+         \PY{n}{race\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Race/race\PYZus{}after.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{race\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:}            total  visible\_minority  south\_asian  chinese   black  filipino  \textbackslash{}
+         Toronto  2691665           1385850       338960   299465  239855    152715   
+         Ward 1     60045             49875        20615      700   13935      2190   
+         Ward 2     56295             35405        12210      805   11990      2050   
+         Ward 3     63170             18215         4020     2450    3320      1975   
+         Ward 4     65330             18755         4315     1620    5135      1375   
+         
+                  latin\_american   arab  southeast\_asian  west\_asian  korean  japanese  \textbackslash{}
+         Toronto           77165  36030            41650       60320   41640     13410   
+         Ward 1             2410   3120             1065        1715     140        40   
+         Ward 2             3045    525              925        1015     325       100   
+         Ward 3             1630    675              540         840    1380       275   
+         Ward 4             2495    385              305         590    1055       285   
+         
+                  other\_visible\_minoirty  multiple\_visible\_minorities  \textbackslash{}
+         Toronto                   36975                        47670   
+         Ward 1                     2715                         1235   
+         Ward 2                     1300                         1115   
+         Ward 3                      380                          735   
+         Ward 4                      555                          650   
+         
+                  not\_visible\_minority  
+         Toronto               1305815  
+         Ward 1                  10165  
+         Ward 2                  20895  
+         Ward 3                  44955  
+         Ward 4                  46575  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{race\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:}            total  visible\_minority  south\_asian  chinese   black  filipino  \textbackslash{}
+         Toronto  2691665           1385855       338965   299465  239850    152715   
+         Ward 1    116955             88495        33825     1635   27365      4460   
+         Ward 2    116055             31445         6910     3530    6825      2835   
+         Ward 3    127525             35355         7050     4445    6325      4255   
+         Ward 4    106445             27865         5010     3710    5625      2805   
+         
+                  latin\_american   arab  southeast\_asian  west\_asian  korean  japanese  \textbackslash{}
+         Toronto           77165  36030            41645       60325   41640     13415   
+         Ward 1             5605   3705             2015        2790     480       145   
+         Ward 2             3725    885              715        1315    2165       500   
+         Ward 3             3060   1155             1315         915    2425       655   
+         Ward 4             2320    700             1595         585    1015       730   
+         
+                  other\_visible\_minoirty  multiple\_visible\_minorities  \textbackslash{}
+         Toronto                   36975                        47670   
+         Ward 1                     4115                         2355   
+         Ward 2                      805                         1235   
+         Ward 3                     2185                         1575   
+         Ward 4                     2255                         1515   
+         
+                  not\_visible\_minority  
+         Toronto               1305815  
+         Ward 1                  28460  
+         Ward 2                  84615  
+         Ward 3                  92165  
+         Ward 4                  78580  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{race\PYZus{}before}\PY{p}{,} \PY{n}{race\PYZus{}after} \PY{o}{=} \PY{n}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{race\PYZus{}before}\PY{p}{,} \PY{n}{race\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{race\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:}           total  visible\_minority   south\_asian      chinese         black  \textbackslash{}
+         Ward 1  60735.0      50448.132651  20851.894829   708.043967  14095.132401   
+         Ward 2  57210.0      35980.460965  12408.457234   818.084199  12184.881428   
+         Ward 3  64065.0      18473.072265   4076.955833  2484.711889   3367.038151   
+         Ward 4  66060.0      18964.569111   4363.215980  1638.101944   5192.378693   
+         Ward 5  49520.0      14398.286064   3324.235870  1606.545603   2404.766374   
+         
+                    filipino  latin\_american         arab  southeast\_asian  \textbackslash{}
+         Ward 1  2215.166125     2437.694229  3155.853110      1077.238321   
+         Ward 2  2083.320011     3094.492406   533.533173       940.034639   
+         Ward 3  2002.982033     1653.094032   684.563479       547.650784   
+         Ward 4  1390.364304     2522.879229   389.302005       308.408082   
+         Ward 5  1404.464395     1111.446644   464.786778       535.515201   
+         
+                  west\_asian       korean    japanese  other\_visible\_minoirty  \textbackslash{}
+         Ward 1  1734.707719   141.608793   40.459655             2746.199101   
+         Ward 2  1031.497469   330.282441  101.625366             1321.129763   
+         Ward 3   851.901219  1399.552003  278.896232              385.383885   
+         Ward 4   596.592683  1066.788612  288.184601              561.201592   
+         Ward 5   399.110386  1530.765150  267.757600              823.480922   
+         
+                 multiple\_visible\_minorities  not\_visible\_minority  
+         Ward 1                  1249.191856          10281.809893  
+         Ward 2                  1133.122835          21234.620304  
+         Ward 3                   745.413567          45591.927735  
+         Ward 4                   657.263126          47095.430889  
+         Ward 5                   535.515201          35121.713936  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{race\PYZus{}before}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} Index(['total', 'visible\_minority', 'south\_asian', 'chinese', 'black',
+                'filipino', 'latin\_american', 'arab', 'southeast\_asian', 'west\_asian',
+                'korean', 'japanese', 'other\_visible\_minoirty',
+                'multiple\_visible\_minorities', 'not\_visible\_minority'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} Initialize params}
+         \PY{n}{protected} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{visible\PYZus{}minority}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{south\PYZus{}asian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chinese}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filipino}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latin\PYZus{}american}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{arab}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{southeast\PYZus{}asian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{west\PYZus{}asian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{korean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{japanese}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}visible\PYZus{}minoirty}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{multiple\PYZus{}visible\PYZus{}minorities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{protected}\PY{p}{:}
+             \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{race\PYZus{}before}\PY{o}{.}\PY{n}{total}
+             \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{race\PYZus{}before}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+             \PY{n}{majority\PYZus{}before} \PY{o}{=} \PY{n}{race\PYZus{}before}\PY{o}{.}\PY{n}{not\PYZus{}visible\PYZus{}minority}
+         
+             \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{race\PYZus{}after}\PY{o}{.}\PY{n}{total}
+             \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{race\PYZus{}after}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+             \PY{n}{majority\PYZus{}after} \PY{o}{=} \PY{n}{race\PYZus{}after}\PY{o}{.}\PY{n}{not\PYZus{}visible\PYZus{}minority}
+         
+             \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase} \PY{o}{=} \PY{n}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} 
+                                                                   \PY{n}{protected\PYZus{}before}\PY{p}{,} 
+                                                                   \PY{n}{majority\PYZus{}before}\PY{p}{,} 
+                                                                   \PY{n}{total\PYZus{}after}\PY{p}{,}
+                                                                   \PY{n}{protected\PYZus{}after}\PY{p}{,} 
+                                                                   \PY{n}{majority\PYZus{}after}\PY{p}{)}
+             \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{col}\PY{p}{,} \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{race\PYZus{}results} \PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{protected\PYZus{}increase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{majority\PYZus{}increase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{race\PYZus{}results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{disparity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{race\PYZus{}results}\PY{o}{.}\PY{n}{protected\PYZus{}increase} \PY{o}{\PYZhy{}} \PY{n}{race\PYZus{}results}\PY{o}{.}\PY{n}{majority\PYZus{}increase}
+         \PY{n}{race\PYZus{}results}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{protected\PYZus{}increase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average ward size increase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hlines}\PY{p}{(}\PY{n}{race\PYZus{}results}\PY{o}{.}\PY{n}{majority\PYZus{}increase}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{xmin} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white increase}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{45000}\PY{p}{,}\PY{l+m+mi}{57000}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Some groups (S. asians, chinese, filipino) have more representation }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ while others (L. american, Korean, SE. Asian) have less}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{threshold} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{5}
+          \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{protected}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{race\PYZus{}before}\PY{o}{.}\PY{n}{total}
+              \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{race\PYZus{}before}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+              \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{protected\PYZus{}before}\PY{o}{/}\PY{n}{total\PYZus{}before}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wards with majority }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                    \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{p}{,} 
+                            \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                            \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{47}
+                           \PY{p}{)}
+                   \PY{p}{)}
+              
+              \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{race\PYZus{}after}\PY{o}{.}\PY{n}{total}
+              \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{race\PYZus{}after}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+              \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{protected\PYZus{}after}\PY{o}{/}\PY{n}{total\PYZus{}after}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wards with majority }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ after: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                    \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{p}{,} 
+                            \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                            \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{25}
+                           \PY{p}{)}
+                   \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+---------------------------
+wards with majority visible\_minority before: 24/47=0.5106382978723404
+wards with majority visible\_minority after: 12/47=0.48
+---------------------------
+wards with majority south\_asian before: 0/47=0.0
+wards with majority south\_asian after: 0/47=0.0
+---------------------------
+wards with majority chinese before: 1/47=0.02127659574468085
+wards with majority chinese after: 0/47=0.0
+---------------------------
+wards with majority black before: 0/47=0.0
+wards with majority black after: 0/47=0.0
+---------------------------
+wards with majority filipino before: 0/47=0.0
+wards with majority filipino after: 0/47=0.0
+---------------------------
+wards with majority latin\_american before: 0/47=0.0
+wards with majority latin\_american after: 0/47=0.0
+---------------------------
+wards with majority arab before: 0/47=0.0
+wards with majority arab after: 0/47=0.0
+---------------------------
+wards with majority southeast\_asian before: 0/47=0.0
+wards with majority southeast\_asian after: 0/47=0.0
+---------------------------
+wards with majority west\_asian before: 0/47=0.0
+wards with majority west\_asian after: 0/47=0.0
+---------------------------
+wards with majority korean before: 0/47=0.0
+wards with majority korean after: 0/47=0.0
+---------------------------
+wards with majority japanese before: 0/47=0.0
+wards with majority japanese after: 0/47=0.0
+---------------------------
+wards with majority other\_visible\_minoirty before: 0/47=0.0
+wards with majority other\_visible\_minoirty after: 0/47=0.0
+---------------------------
+wards with majority multiple\_visible\_minorities before: 0/47=0.0
+wards with majority multiple\_visible\_minorities after: 0/47=0.0
+
+    \end{Verbatim}
+
+    \section{Language}\label{language}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{lang\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Language/language\PYZus{}before.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lang\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Language/language\PYZus{}after.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{lang\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}82}]:}            total  english  non\_english
+         Toronto  2691665  2557220       134445
+         Ward 1     60040    56105         3940
+         Ward 2     56300    54115         2180
+         Ward 3     63165    61410         1755
+         Ward 4     65330    63855         1475
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{lang\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:}            total  english  non\_english
+         Toronto  2691665  2557220       134445
+         Ward 1    116960   110765         6185
+         Ward 2    116055   113025         3030
+         Ward 3    127520   124255         3265
+         Ward 4    106445   103735         2710
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{lang\PYZus{}before}\PY{p}{,} \PY{n}{lang\PYZus{}after} \PY{o}{=} \PY{n}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{lang\PYZus{}before}\PY{p}{,} \PY{n}{lang\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{lang\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:}           total       english  non\_english
+         Ward 1  60735.0  56754.449950  3985.607928
+         Ward 2  57210.0  54989.682948  2215.236234
+         Ward 3  64065.0  62284.994063  1780.005937
+         Ward 4  66060.0  64568.518292  1491.481708
+         Ward 5  49520.0  48145.847786  1384.256274
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{c+c1}{\PYZsh{} Initialize params}
+         \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{lang\PYZus{}before}\PY{o}{.}\PY{n}{total}
+         \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{lang\PYZus{}before}\PY{o}{.}\PY{n}{non\PYZus{}english}
+         \PY{n}{majority\PYZus{}before} \PY{o}{=} \PY{n}{lang\PYZus{}before}\PY{o}{.}\PY{n}{english}
+         
+         \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{lang\PYZus{}after}\PY{o}{.}\PY{n}{total}
+         \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{lang\PYZus{}after}\PY{o}{.}\PY{n}{non\PYZus{}english}
+         \PY{n}{majority\PYZus{}after} \PY{o}{=} \PY{n}{lang\PYZus{}after}\PY{o}{.}\PY{n}{english}
+         
+         \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase} \PY{o}{=} \PY{n}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{protected\PYZus{}before}\PY{p}{,} \PY{n}{majority\PYZus{}before}\PY{p}{,} \PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{protected\PYZus{}after}\PY{p}{,} \PY{n}{majority\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you are english speaking, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you are not english speaking, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a disparity of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{o}{\PYZhy{}}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+If you are english speaking, your ward size increased by 47397 people on average
+If you are not english speaking, your ward size increased by 50187 people on average
+This is a disparity of -2790 people on average
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{c+c1}{\PYZsh{} lost majorities}
+         \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{protected\PYZus{}before} \PY{o}{/} \PY{n}{total\PYZus{}before}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority not english speaking before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{protected\PYZus{}after} \PY{o}{/} \PY{n}{total\PYZus{}after}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority not english speaking before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/25}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Wards with majority not english speaking before: 0/47
+Wards with majority not english speaking before: 0/25
+
+    \end{Verbatim}
+
+    \section{First generation immigrants}\label{first-generation-immigrants}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{immigrant\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Immigration/immigration\PYZus{}before.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+          \PY{n}{immigrant\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Immigration/immigration\PYZus{}after.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{immigrant\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:}            total  first\_gen  second\_gen\_plus
+          Toronto  2691665    1377465          1314205
+          Ward 1     60040      39450            20585
+          Ward 2     56295      30490            25810
+          Ward 3     63165      28290            34870
+          Ward 4     65335      26895            38440
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{immigrant\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:}            total  first\_gen  second\_gen\_plus
+          Toronto  2691665    1377465          1314205
+          Ward 1    116960      71535            45425
+          Ward 2    116055      50030            66025
+          Ward 3    127525      51980            75545
+          Ward 4    106445      37785            68650
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{immigrant\PYZus{}before}\PY{p}{,} \PY{n}{immigrant\PYZus{}after} \PY{o}{=} \PY{n}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{immigrant\PYZus{}before}\PY{p}{,} \PY{n}{immigrant\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{immigrant\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}112}]:}           total     first\_gen  second\_gen\_plus
+          Ward 1  60735.0  39906.658061     20823.284061
+          Ward 2  57210.0  30985.574207     26229.507061
+          Ward 3  64065.0  28693.087153     35366.841605
+          Ward 4  66060.0  27193.444555     38866.555445
+          Ward 5  49520.0  21839.926546     27685.125485
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{c+c1}{\PYZsh{} Initialize params}
+          \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{immigrant\PYZus{}before}\PY{o}{.}\PY{n}{total}
+          \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{immigrant\PYZus{}before}\PY{o}{.}\PY{n}{first\PYZus{}gen}
+          \PY{n}{majority\PYZus{}before} \PY{o}{=} \PY{n}{immigrant\PYZus{}before}\PY{o}{.}\PY{n}{second\PYZus{}gen\PYZus{}plus}
+          
+          \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{immigrant\PYZus{}after}\PY{o}{.}\PY{n}{total}
+          \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{immigrant\PYZus{}after}\PY{o}{.}\PY{n}{first\PYZus{}gen}
+          \PY{n}{majority\PYZus{}after} \PY{o}{=} \PY{n}{immigrant\PYZus{}after}\PY{o}{.}\PY{n}{second\PYZus{}gen\PYZus{}plus}
+          
+          \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase} \PY{o}{=} \PY{n}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{protected\PYZus{}before}\PY{p}{,} \PY{n}{majority\PYZus{}before}\PY{p}{,} \PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{protected\PYZus{}after}\PY{p}{,} \PY{n}{majority\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you are first gen canadian, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you are not first gen canadian, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a disparity of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{o}{\PYZhy{}}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+If you are first gen canadian, your ward size increased by 49799 people on average
+If you are not first gen canadian, your ward size increased by 50308 people on average
+This is a disparity of -509 people on average
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{c+c1}{\PYZsh{} lost majorities}
+          \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{protected\PYZus{}before} \PY{o}{/} \PY{n}{total\PYZus{}before}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority first gen canadian before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                       \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{47}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{protected\PYZus{}after} \PY{o}{/} \PY{n}{total\PYZus{}after}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority first gen canadian after: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/25=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                       \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Wards with majority first gen canadian before: 27/47=0.574468085106383
+Wards with majority first gen canadian after: 12/25=0.48
+
+    \end{Verbatim}
+
+    I think this is pretty significant
+
+    \section{Education}\label{education}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{education\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Education/education\PYZus{}before.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+          \PY{n}{education\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Education/education\PYZus{}after.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{education\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}128}]:}            total  post\_secondary  no\_post\_secondary
+          Toronto  2294785         1356355             938435
+          Ward 1     48650           20630              28020
+          Ward 2     46555           21875              24680
+          Ward 3     53825           32465              21365
+          Ward 4     55085           33430              21660
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{education\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:}            total  post\_secondary  no\_post\_secondary
+          Toronto  2294790         1356355             938430
+          Ward 1     95295           42350              52940
+          Ward 2     98790           58480              40305
+          Ward 3    110720           71165              39555
+          Ward 4     90620           62430              28195
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}130}]:} \PY{n}{education\PYZus{}before}\PY{p}{,} \PY{n}{education\PYZus{}after} \PY{o}{=} \PY{n}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{education\PYZus{}before}\PY{p}{,} \PY{n}{education\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{education\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}131}]:}           total  post\_secondary  no\_post\_secondary
+          Ward 1  60735.0    25754.636177       34980.363823
+          Ward 2  57210.0    26881.511116       30328.488884
+          Ward 3  64065.0    38641.341849       25429.609382
+          Ward 4  66060.0    40090.511028       25975.485159
+          Ward 5  49520.0    32661.128497       16864.741584
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{c+c1}{\PYZsh{} Initialize params}
+          \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{education\PYZus{}before}\PY{o}{.}\PY{n}{total}
+          \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{education\PYZus{}before}\PY{o}{.}\PY{n}{no\PYZus{}post\PYZus{}secondary}
+          \PY{n}{majority\PYZus{}before} \PY{o}{=} \PY{n}{education\PYZus{}before}\PY{o}{.}\PY{n}{post\PYZus{}secondary}
+          
+          \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{education\PYZus{}after}\PY{o}{.}\PY{n}{total}
+          \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{education\PYZus{}after}\PY{o}{.}\PY{n}{no\PYZus{}post\PYZus{}secondary}
+          \PY{n}{majority\PYZus{}after} \PY{o}{=} \PY{n}{education\PYZus{}after}\PY{o}{.}\PY{n}{post\PYZus{}secondary}
+          
+          \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase} \PY{o}{=} \PY{n}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{protected\PYZus{}before}\PY{p}{,} \PY{n}{majority\PYZus{}before}\PY{p}{,} \PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{protected\PYZus{}after}\PY{p}{,} \PY{n}{majority\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t have a post\PYZhy{}secondary degree, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you have a post\PYZhy{}secondary degree, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a disparity of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{o}{\PYZhy{}}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+If you don't have a post-secondary degree, your ward size increased by 49261 people on average
+If you have a post-secondary degree, your ward size increased by 50598 people on average
+This is a disparity of -1337 people on average
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{c+c1}{\PYZsh{} lost majorities}
+          \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{protected\PYZus{}before} \PY{o}{/} \PY{n}{total\PYZus{}before}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority no post\PYZhy{}secondary degree before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                       \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{47}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{protected\PYZus{}after} \PY{o}{/} \PY{n}{total\PYZus{}after}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority no post\PYZhy{}secondary degree after: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/25=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                       \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Wards with majority no post-secondary degree before: 13/47=0.2765957446808511
+Wards with majority no post-secondary degree after: 5/25=0.2
+
+    \end{Verbatim}
+
+    \section{Renter vs. Home Owner}\label{renter-vs.-home-owner}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{housing\PYZus{}before} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Housing/home\PYZus{}before.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+          \PY{n}{housing\PYZus{}after} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/Housing/home\PYZus{}after.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{housing\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}140}]:}            total     own    rent
+          Toronto  1112905  587080  525825
+          Ward 1     18305    9925    8385
+          Ward 2     19465   11705    7765
+          Ward 3     24530   17615    6915
+          Ward 4     25675   15700    9975
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{housing\PYZus{}after}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}141}]:}            total     own    rent
+          Toronto  1112905  587080  525825
+          Ward 1     37895   20945   16945
+          Ward 2     45045   30175   14870
+          Ward 3     59730   33860   25870
+          Ward 4     50315   21375   28945
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{n}{housing\PYZus{}before}\PY{p}{,} \PY{n}{housing\PYZus{}after} \PY{o}{=} \PY{n}{scale\PYZus{}populations}\PY{p}{(}\PY{n}{housing\PYZus{}before}\PY{p}{,} \PY{n}{housing\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{n}{housing\PYZus{}before}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}143}]:}           total           own          rent
+          Ward 1  60735.0  32930.613220  27820.976509
+          Ward 2  57210.0  34402.417159  22822.278448
+          Ward 3  64065.0  46005.094782  18059.905218
+          Ward 4  66060.0  40395.014606  25664.985394
+          Ward 5  49520.0  28338.746890  21192.454196
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{c+c1}{\PYZsh{} Initialize params}
+          \PY{n}{total\PYZus{}before} \PY{o}{=} \PY{n}{housing\PYZus{}before}\PY{o}{.}\PY{n}{total}
+          \PY{n}{protected\PYZus{}before} \PY{o}{=} \PY{n}{housing\PYZus{}before}\PY{o}{.}\PY{n}{rent}
+          \PY{n}{majority\PYZus{}before} \PY{o}{=} \PY{n}{housing\PYZus{}before}\PY{o}{.}\PY{n}{own}
+          
+          \PY{n}{total\PYZus{}after} \PY{o}{=} \PY{n}{housing\PYZus{}after}\PY{o}{.}\PY{n}{total}
+          \PY{n}{protected\PYZus{}after} \PY{o}{=} \PY{n}{housing\PYZus{}after}\PY{o}{.}\PY{n}{rent}
+          \PY{n}{majority\PYZus{}after} \PY{o}{=} \PY{n}{housing\PYZus{}after}\PY{o}{.}\PY{n}{own}
+          
+          \PY{n}{protected\PYZus{}increase}\PY{p}{,} \PY{n}{majority\PYZus{}increase} \PY{o}{=} \PY{n}{get\PYZus{}increases}\PY{p}{(}\PY{n}{total\PYZus{}before}\PY{p}{,} \PY{n}{protected\PYZus{}before}\PY{p}{,} \PY{n}{majority\PYZus{}before}\PY{p}{,} \PY{n}{total\PYZus{}after}\PY{p}{,} \PY{n}{protected\PYZus{}after}\PY{p}{,} \PY{n}{majority\PYZus{}after}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you rent, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If you own your home, your ward size increased by }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a disparity of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ people on average}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{protected\PYZus{}increase}\PY{o}{\PYZhy{}}\PY{n}{majority\PYZus{}increase}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+If you rent, your ward size increased by 50615 people on average
+If you own your home, your ward size increased by 49567 people on average
+This is a disparity of 1048 people on average
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{c+c1}{\PYZsh{} lost majorities}
+          \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{o}{=} \PY{n}{protected\PYZus{}before} \PY{o}{/} \PY{n}{total\PYZus{}before}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority renters before: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/47=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                       \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}before} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{47}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{o}{=} \PY{n}{protected\PYZus{}after} \PY{o}{/} \PY{n}{total\PYZus{}after}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wards with majority renters after: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/25=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                       \PY{n+nb}{len}\PY{p}{(}\PY{p}{[}\PY{n}{p} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{prop\PYZus{}protected\PYZus{}after} \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Wards with majority renters before: 17/47=0.3617021276595745
+Wards with majority renters after: 9/25=0.36
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
